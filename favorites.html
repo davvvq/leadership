@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Избранное | LEADERSHIP</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .favorites-hero {
+            background: linear-gradient(135deg, rgba(0,0,0,0.55), rgba(0,0,0,0.4)), url('https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=1920&h=500&fit=crop');
+            background-size: cover;
+            background-position: center 30%;
+            color: white;
+            padding: 80px 40px;
+            border-radius: 12px;
+            margin: 40px auto;
+            text-align: center;
+            position: relative;
+            max-width: 1280px;
+        }
+
+        .favorites-hero {
+            background: linear-gradient(135deg, rgba(0,0,0,0.55), rgba(0,0,0,0.4)), url('images/jpg/избранбаннер.jpg');
+            background-size: cover;
+            background-position: center;
+        } 
+
+        .favorites-hero:before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            pointer-events: none;
+            border-radius: 8px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.15);
+            padding: 6px 18px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .favorites-hero h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .favorites-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 25px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .hero-discount-badges {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .hero-discount-badges .badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(4px);
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #ffffff;
+        }
+
+        .hero-discount-badges .badge:first-child {
+            background: #c0392b;
+            border-color: #c0392b;
+        }
+        
+        .favorites-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+            min-height: 400px;
+        }
+        .favorites-empty {
+            text-align: center;
+            padding: 80px 20px;
+            background: #f8f8f8;
+            border-radius: 12px;
+        }
+        .favorites-empty i {
+            font-size: 64px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        .favorites-empty h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .favorites-empty p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        .product-card {
+            border: 1px solid #f0f0f0;
+            background: #fff;
+            padding: 15px;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .product-image {
+            aspect-ratio: 3/4;
+            background: #f8f8f8;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #000;
+            color: #fff;
+            padding: 3px 8px;
+            font-size: 10px;
+            z-index: 2;
+        }
+        .quick-view {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            border: none;
+            padding: 8px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: bottom 0.3s;
+            z-index: 3;
+        }
+        .product-card:hover .quick-view {
+            bottom: 0;
+        }
+        .product-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-info h3 {
+            font-size: 14px;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+        .product-category {
+            font-size: 11px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+        .product-price {
+            margin-bottom: 12px;
+        }
+        .current-price {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .old-price {
+            font-size: 13px;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 8px;
+        }
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+        .btn-add-to-cart {
+            flex: 1;
+            padding: 10px;
+            background: #000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 11px;
+            letter-spacing: 1px;
+            transition: background 0.2s;
+        }
+        .btn-add-to-cart:hover {
+            background: #333;
+        }
+        .btn-remove-favorite {
+            width: 40px;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            color: #ff4444;
+        }
+        .btn-remove-favorite:hover {
+            background: #ff4444;
+            color: #fff;
+            border-color: #ff4444;
+        }
+        
+        /* Стили для уведомлений */
+        .toast-notification {
+            position: fixed !important;
+            bottom: 30px !important;
+            right: 30px !important;
+            background: #1a1a1a !important;
+            color: white !important;
+            padding: 10px 20px !important;
+            border-radius: 8px !important;
+            font-size: 13px !important;
+            font-family: 'Inter', sans-serif !important;
+            z-index: 999999 !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+            width: auto !important;
+            max-width: 300px !important;
+            min-width: 180px !important;
+            height: auto !important;
+            line-height: 1.4 !important;
+            pointer-events: none !important;
+            white-space: nowrap !important;
+            opacity: 0 !important;
+            transform: translateX(100%) !important;
+            transition: all 0.3s ease !important;
+        }
+        .toast-notification.show {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
+        .toast-notification.success { border-left: 3px solid #4CAF50 !important; }
+        .toast-notification.info { border-left: 3px solid #2196F3 !important; }
+        .toast-notification.error { border-left: 3px solid #f44336 !important; }
+        
+        @media (max-width: 1024px) {
+            .favorites-grid { grid-template-columns: repeat(2, 1fr); }
+            .favorites-hero h1 { font-size: 2.5rem; }
+        }
+        @media (max-width: 768px) {
+            .favorites-grid { grid-template-columns: 1fr; }
+            .favorites-hero {
+                padding: 50px 20px;
+                margin: 30px auto;
+            }
+            .favorites-hero h1 {
+                font-size: 2rem;
+            }
+            .hero-discount-badges {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .hero-discount-badges .badge {
+                padding: 6px 16px;
+                font-size: 11px;
+            }
+            .hero-badge {
+                font-size: 10px;
+                padding: 4px 12px;
+            }
+            .toast-notification {
+                bottom: 20px !important;
+                right: 20px !important;
+                left: auto !important;
+                white-space: normal !important;
+                max-width: calc(100% - 40px) !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта (обновленная навигация) -->
+    <div class="container">
+        <header class="site-header">
+            <div class="logo">
+                <h1>LEADERSHIP</h1>
+                <span class="logo-sub">PARIS · LONDON · MOSCOW</span>
+            </div>
+
+            <div class="header-search">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="ПОИСК ПО КАТАЛОГУ...">
+            </div>
+
+            <!-- ОБНОВЛЕННАЯ НАВИГАЦИЯ: вместо Коллекции и Блога - О БРЕНДЕ и МАГАЗИНЫ -->
+            <nav class="main-nav">
+                <a href="index.html">ГЛАВНАЯ</a>
+                <a href="catalog.html">КАТАЛОГ</a>
+                <a href="about.html">О БРЕНДЕ</a>
+                <a href="shops.html">МАГАЗИНЫ</a>
+                <a href="contacts.html">КОНТАКТЫ</a>
+                <a href="favorites.html" class="favorites-link" style="position: relative;">
+                    ИЗБРАННОЕ
+                    <span id="favoritesCount" style="display: none; position: absolute; top: -8px; right: -12px; background: #000; color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; align-items: center; justify-content: center;">0</span>
+                </a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="header-icons">
+                    <span class="header-icon" onclick="window.location.href='profile.html'">👤</span>
+                    <span class="header-icon" onclick="window.location.href='cart.html'" style="position: relative;">
+                        🛒
+                        <span id="cartCount" style="display: none; position: absolute; top: -8px; right: -12px; background: #000; color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; align-items: center; justify-content: center;">0</span>
+                    </span>
+                </div>
+               <button class="btn-primary" id="authBtn">ВОЙТИ</button>
+            </div>
+        </header>
+    </div>
+
+    <!-- Красочный баннер с фоновым изображением для страницы Избранное -->
+    <div class="favorites-hero">
+        <div class="hero-badge">ВАШИ ПРЕДПОЧТЕНИЯ</div>
+        <h1>ИЗБРАННОЕ</h1>
+        <p>Товары, которые вам понравились</p>
+        <div class="hero-discount-badges">
+            <span class="badge">❤️ ЛЮБИМОЕ</span>
+            <span class="badge">⭐ СОХРАНЁННОЕ</span>
+        </div>
+    </div>
+
+    <div class="favorites-container">
+        <div id="favoritesContent"></div>
+    </div>
+
+    <!-- Модальное окно быстрого просмотра -->
+    <div id="quickViewModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeQuickView()">✕</button>
+            <div id="quickViewContent" class="modal-body"></div>
+        </div>
+    </div>
+
+   <footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="footer-logo">LEADERSHIP</a>
+                <p class="footer-desc">Элегантная мужская одежда с 1984 года. Французский шик и итальянское качество в каждом изделии.</p>
+                <div class="social-links">
+                    <a href="https://vk.com" class="social-link" onclick="openSocial('vk')"><i class="fab fa-vk"></i></a>
+                    <a href="https://pinterest.com" class="social-link" onclick="openSocial('pinterest')"><i class="fab fa-pinterest"></i></a>
+                    <a href="https://max.ru" class="social-link" onclick="openSocial('max')"><i class="fas fa-m"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>КАТАЛОГ</h4>
+                <ul>
+                    <li><a href="catalog.html?category=suits">Костюмы</a></li>
+                    <li><a href="catalog.html?category=jackets">Пиджаки</a></li>
+                    <li><a href="catalog.html?category=trousers">Брюки</a></li>
+                    <li><a href="catalog.html?category=shirts">Рубашки</a></li>
+                    <li><a href="catalog.html?category=outerwear">Верхняя одежда</a></li>
+                    <li><a href="catalog.html?category=accessories">Аксессуары</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>ИНФОРМАЦИЯ</h4>
+                <ul>
+                    <li><a href="about.html">О бренде</a></li>
+                    <li><a href="shops.html">Магазины</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="delivery.html">Доставка и оплата</a></li>
+                    <li><a href="return.html">Возврат товара</a></li>
+                    <li><a href="size-guide.html">Таблица размеров</a></li>
+                    <li><a href="track-order.html">Отследить заказ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>КОНТАКТЫ</h4>
+                <ul class="contact-list">
+                    <li><i class="fas fa-map-marker-alt"></i><span>Москва, Тверская 15</span></li>
+                    <li><i class="fas fa-clock"></i><span>Ежедневно 10:00 - 22:00</span></li>
+                    <li><i class="fas fa-phone-alt"></i><span>8 (800) 123-45-67</span></li>
+                    <li><i class="fas fa-envelope"></i><a href="mailto:info@leadership.ru">info@leadership.ru</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 LEADERSHIP. ALL RIGHTS RESERVED. PARIS · LONDON · MOSCOW</p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        // ============== ДАННЫЕ ТОВАРОВ ==============
+        const products = [
+            { id: 1, name: "Костюм классический черный", category: "suits", price: 34990, oldPrice: 41990, image: "images/jpg/классичкостюмчерный.jpg", sizes: ["S","M","L","XL"], desc: "Элегантный классический костюм из высококачественной шерсти." },
+            { id: 2, name: "Костюм деловой синий", category: "suits", price: 45990, oldPrice: 51990, image: "images/jpg/костюмделовсиний.jpg", sizes: ["S","M","L","XL"], desc: "Строгий деловой костюм темно-синего цвета." },
+            { id: 3, name: "Костюм серый", category: "suits", price: 38990, oldPrice: null, image: "images/jpg/костюмсерый.jpg", sizes: ["S","M","L","XL","XXL"], desc: "Универсальный серый костюм." },
+            { id: 4, name: "Пиджак черный", category: "jackets", price: 22500, oldPrice: null, image: "images/jpg/пиджакчерный.jpg", sizes: ["S","M","L","XL"], desc: "Элегантный черный пиджак." },
+            { id: 5, name: "Пиджак бежевый", category: "jackets", price: 18900, oldPrice: 22900, image: "images/jpg/пиджакбежевый.jpg", sizes: ["S","M","L","XL"], desc: "Стильный бежевый пиджак." },
+            { id: 6, name: "Брюки черные", category: "trousers", price: 8900, oldPrice: null, image: "images/jpg/брюкичерные.jpg", sizes: ["S","M","L","XL"], desc: "Классические черные брюки." },
+            { id: 7, name: "Брюки бежевые", category: "trousers", price: 6900, oldPrice: 7900, image: "images/jpg/брюкибежевые.jpg", sizes: ["S","M","L"], desc: "Легкие бежевые брюки." },
+            { id: 8, name: "Рубашка белая", category: "shirts", price: 4900, oldPrice: null, image: "images/jpg/рубашкабелая.jpg", sizes: ["S","M","L","XL","XXL"], desc: "Классическая белая рубашка." },
+            { id: 9, name: "Рубашка голубая", category: "shirts", price: 5900, oldPrice: null, image: "images/jpg/рубашкаголубая.jpg", sizes: ["S","M","L","XL"], desc: "Стильная голубая рубашка." },
+            { id: 10, name: "Ремень кожаный", category: "accessories", price: 5900, oldPrice: 6900, image: "images/jpg/ременькожаный.jpg", sizes: ["S","M","L","XL"], desc: "Натуральный кожаный ремень." },
+            { id: 11, name: "Галстук шелковый", category: "accessories", price: 3900, oldPrice: null, image: "images/jpg/галстукшелковый.jpg", sizes: ["one"], desc: "Элегантный шелковый галстук." }
+        ];
+
+        // ============== ПЕРЕМЕННЫЕ ==============
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // ============== ОТРИСОВКА ИЗБРАННОГО ==============
+        function getCategoryName(cat) {
+            const names = { suits: 'Костюмы', jackets: 'Пиджаки', trousers: 'Брюки', shirts: 'Рубашки', accessories: 'Аксессуары' };
+            return names[cat] || cat;
+        }
+
+        function renderFavorites() {
+            const container = document.getElementById('favoritesContent');
+            const favoriteProducts = products.filter(p => favorites.includes(p.id));
+            
+            if (favoriteProducts.length === 0) {
+                container.innerHTML = `
+                    <div class="favorites-empty">
+                        <i class="far fa-heart"></i>
+                        <h2>У вас пока нет избранных товаров</h2>
+                        <p>Добавляйте товары в избранное, чтобы не потерять понравившиеся модели</p>
+                        <a href="catalog.html" class="btn-primary" style="display: inline-block; padding: 12px 30px; text-decoration: none;">ПЕРЕЙТИ В КАТАЛОГ</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = `
+                <div class="favorites-grid">
+                    ${favoriteProducts.map(product => `
+                        <div class="product-card" data-id="${product.id}">
+                            <div class="product-image">
+                                <img src="${product.image}" alt="${product.name}" onerror="this.src='https://placehold.co/600x800/f5f5f5/999?text=Фото'">
+                                ${product.oldPrice ? `<div class="product-badge">-${Math.round((1 - product.price/product.oldPrice)*100)}%</div>` : ''}
+                                <button class="quick-view" onclick="quickView(${product.id})">БЫСТРЫЙ ПРОСМОТР</button>
+                            </div>
+                            <div class="product-info">
+                                <h3>${product.name}</h3>
+                                <div class="product-category">${getCategoryName(product.category)}</div>
+                                <div class="product-price">
+                                    <span class="current-price">${product.price.toLocaleString()} ₽</span>
+                                    ${product.oldPrice ? `<span class="old-price">${product.oldPrice.toLocaleString()} ₽</span>` : ''}
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn-add-to-cart" onclick="addToCart(${product.id})">В КОРЗИНУ</button>
+                                    <button class="btn-remove-favorite" onclick="removeFromFavorites(${product.id})" title="Удалить из избранного">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // ============== КОРЗИНА ==============
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            cart.push({ id: product.id, name: product.name, price: product.price, image: product.image });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showNotification(`${product.name} добавлен в корзину 🛒`, 'success');
+        }
+
+        function updateCartCount() {
+            const count = cart.length;
+            const cartSpan = document.getElementById('cartCount');
+            if (cartSpan) {
+                cartSpan.textContent = count;
+                cartSpan.style.display = count > 0 ? 'inline-flex' : 'none';
+            }
+        }
+
+        // ============== ИЗБРАННОЕ ==============
+        function removeFromFavorites(id) {
+            favorites = favorites.filter(f => f !== id);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            renderFavorites();
+            updateFavoritesCount();
+            showNotification('Товар удален из избранного', 'info');
+        }
+
+        function updateFavoritesCount() {
+            const count = favorites.length;
+            const favSpan = document.getElementById('favoritesCount');
+            if (favSpan) {
+                favSpan.textContent = count;
+                favSpan.style.display = count > 0 ? 'inline-flex' : 'none';
+            }
+        }
+
+        // ============== УВЕДОМЛЕНИЯ ==============
+        function showNotification(message, type) {
+            const oldToast = document.querySelector('.toast-notification');
+            if (oldToast) oldToast.remove();
+            
+            const toast = document.createElement('div');
+            toast.className = `toast-notification ${type || 'info'}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.classList.add('show'), 10);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // ============== БЫСТРЫЙ ПРОСМОТР ==============
+        function quickView(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            
+            const modal = document.getElementById('quickViewModal');
+            const content = document.getElementById('quickViewContent');
+            const isFav = favorites.includes(id);
+            
+            content.innerHTML = `
+                <div class="modal-image-container"><img src="${product.image}" class="modal-image" onerror="this.src='https://placehold.co/600x800/f5f5f5/999?text=Фото'"></div>
+                <div class="modal-info">
+                    <div class="modal-category">${getCategoryName(product.category)}</div>
+                    <h2 class="modal-title">${product.name}</h2>
+                    <div class="modal-price"><span class="modal-current-price">${product.price.toLocaleString()} ₽</span>${product.oldPrice ? `<span class="modal-old-price">${product.oldPrice.toLocaleString()} ₽</span>` : ''}</div>
+                    <p class="modal-description">${product.desc}</p>
+                    <div class="modal-sizes"><h4>Выберите размер</h4><div class="modal-size-options" id="modalSizes">${product.sizes.map(s => `<button class="modal-size-btn" data-size="${s}">${s}</button>`).join('')}</div></div>
+                    <div class="modal-actions"><button class="modal-add-to-cart" id="modalAddCart">ДОБАВИТЬ В КОРЗИНУ</button><button class="modal-favorite ${isFav ? 'active' : ''}" id="modalFav">${isFav ? '❤️ В ИЗБРАННОМ' : '🤍 В ИЗБРАННОЕ'}</button></div>
+                </div>
+            `;
+            
+            let selectedSize = product.sizes[0];
+            document.querySelectorAll('#modalSizes .modal-size-btn').forEach(btn => {
+                if (btn.dataset.size === selectedSize) btn.classList.add('selected');
+                btn.onclick = function() {
+                    document.querySelectorAll('#modalSizes .modal-size-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedSize = this.dataset.size;
+                };
+            });
+            
+            document.getElementById('modalAddCart').onclick = () => {
+                cart.push({ id: product.id, name: product.name, price: product.price, image: product.image, size: selectedSize });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                showNotification(`${product.name} добавлен в корзину! Размер: ${selectedSize}`, 'success');
+                closeQuickView();
+            };
+            
+            document.getElementById('modalFav').onclick = () => {
+                if (favorites.includes(id)) {
+                    favorites = favorites.filter(f => f !== id);
+                    document.getElementById('modalFav').classList.remove('active');
+                    document.getElementById('modalFav').innerHTML = '🤍 В ИЗБРАННОЕ';
+                    showNotification('Удалено из избранного', 'info');
+                } else {
+                    favorites.push(id);
+                    document.getElementById('modalFav').classList.add('active');
+                    document.getElementById('modalFav').innerHTML = '❤️ В ИЗБРАННОМ';
+                    showNotification('Добавлено в избранное ❤️', 'success');
+                }
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                renderFavorites();
+                updateFavoritesCount();
+            };
+            
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeQuickView() {
+            const modal = document.getElementById('quickViewModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('click', (e) => { if (e.target === document.getElementById('quickViewModal')) closeQuickView(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeQuickView(); });
+
+       function performGlobalSearch() {
+    const searchInput = document.getElementById('searchInput');
+    if (!searchInput) return;
+    const query = searchInput.value.trim();
+    if (!query) { 
+        alert('Введите поисковый запрос'); 
+        return; 
+    }
+    // Сохраняем поисковый запрос в localStorage
+    localStorage.setItem('globalSearchQuery', query);
+    // Перенаправляем на страницу каталога с параметром search
+    window.location.href = 'catalog.html?search=' + encodeURIComponent(query);
+}
+        
+        function setupSearchOnEnter() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') performGlobalSearch(); });
+            const searchIcon = document.querySelector('.search-icon');
+            if (searchIcon) searchIcon.addEventListener('click', performGlobalSearch);
+        }
+
+        // ============== ИНИЦИАЛИЗАЦИЯ ==============
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFavorites();
+            updateCartCount();
+            updateFavoritesCount();
+            setupSearchOnEnter();
+        });
+    </script>
+
+    <style>
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.show { display: flex; }
+        .modal-content {
+            background: #fff;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 85vh;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #000;
+            color: #fff;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .modal-image-container {
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+        .modal-image { width: 100%; height: auto; max-height: 85vh; object-fit: contain; }
+        .modal-info { padding: 25px; display: flex; flex-direction: column; }
+        .modal-category { font-size: 11px; color: #999; letter-spacing: 2px; margin-bottom: 10px; }
+        .modal-title { font-size: 22px; font-weight: 500; margin-bottom: 15px; }
+        .modal-price { margin-bottom: 20px; }
+        .modal-current-price { font-size: 22px; font-weight: 600; }
+        .modal-old-price { font-size: 14px; color: #999; text-decoration: line-through; margin-left: 10px; }
+        .modal-description { color: #666; line-height: 1.5; margin-bottom: 20px; font-size: 13px; }
+        .modal-sizes { margin-bottom: 20px; }
+        .modal-sizes h4 { font-size: 13px; margin-bottom: 10px; }
+        .modal-size-options { display: flex; gap: 10px; flex-wrap: wrap; }
+        .modal-size-btn { width: 45px; height: 45px; border: 1px solid #ddd; background: #fff; cursor: pointer; }
+        .modal-size-btn.selected { background: #000; color: #fff; }
+        .modal-actions { display: flex; gap: 15px; margin-top: auto; }
+        .modal-add-to-cart { flex: 2; padding: 12px; background: #000; color: #fff; border: none; cursor: pointer; }
+        .modal-favorite { flex: 1; padding: 12px; background: #fff; border: 1px solid #ddd; cursor: pointer; }
+        .modal-favorite.active { background: #fff0f0; border-color: #ff4444; color: #ff4444; }
+        
+        @media (max-width: 768px) {
+            .modal-body { grid-template-columns: 1fr; }
+        }
+    </style>
+    <script>
+// ============== УПРАВЛЕНИЕ СОСТОЯНИЕМ АВТОРИЗАЦИИ ==============
+// Проверка авторизации при загрузке каждой страницы
+function checkAuthState() {
+    const currentUser = localStorage.getItem('currentUser');
+    const authBtn = document.getElementById('authBtn');
+    
+    if (authBtn) {
+        if (currentUser) {
+            // Пользователь авторизован - показываем "ВЫЙТИ"
+            authBtn.textContent = 'ВЫЙТИ';
+            authBtn.onclick = function() {
+                if (confirm('Вы уверены, что хотите выйти?')) {
+                    localStorage.removeItem('currentUser');
+                    localStorage.removeItem('userName');
+                    localStorage.removeItem('userEmail');
+                    showAuthNotification('Вы вышли из аккаунта', 'info');
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                }
+            };
+        } else {
+            // Пользователь не авторизован - показываем "ВОЙТИ"
+            authBtn.textContent = 'ВОЙТИ';
+            authBtn.onclick = function() {
+                window.location.href = 'login.html';
+            };
+        }
+    }
+}
+
+// Функция уведомлений
+function showAuthNotification(message, type = 'info') {
+    const notif = document.createElement('div');
+    notif.className = 'auth-notification';
+    notif.textContent = message;
+    notif.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #1a1a1a;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        z-index: 10001;
+        animation: slideInAuth 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    `;
+    document.body.appendChild(notif);
+    
+    setTimeout(() => {
+        notif.style.animation = 'slideOutAuth 0.3s ease';
+        setTimeout(() => notif.remove(), 300);
+    }, 3000);
+}
+
+// Добавляем стили для анимации
+const authStyle = document.createElement('style');
+authStyle.textContent = `
+    @keyframes slideInAuth {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOutAuth {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+`;
+document.head.appendChild(authStyle);
+
+// Запускаем проверку при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    checkAuthState();
+    
+    // Слушаем изменения localStorage (для синхронизации между вкладками)
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'currentUser') {
+            checkAuthState();
+        }
+    });
+});
+</script>
+</body>
+</html>

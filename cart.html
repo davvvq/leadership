@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина | LEADERSHIP</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .cart-hero {
+            background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('images/jpg/корзинабаннер.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 40px;
+            border-radius: 12px;
+            margin: 40px auto;
+            text-align: center;
+            position: relative;
+            max-width: 1280px;
+        }
+        .cart-hero:before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            pointer-events: none;
+            border-radius: 8px;
+        }
+        .cart-hero h1 {
+            font-size: 3rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .cart-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            color: rgba(255,255,255,0.9);
+        }
+        .cart-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+            margin: 40px auto;
+        }
+        .cart-items {
+            background: #fff;
+            border: 1px solid #f0f0f0;
+        }
+        .cart-header {
+            display: grid;
+            grid-template-columns: 100px 1fr 120px 120px 50px;
+            gap: 15px;
+            padding: 15px 20px;
+            background: #f8f8f8;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+        }
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 1fr 120px 120px 50px;
+            gap: 15px;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: center;
+        }
+        .cart-item-image {
+            width: 80px;
+            height: 100px;
+            object-fit: cover;
+            background: #f8f8f8;
+        }
+        .cart-item-info h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .cart-item-category {
+            font-size: 12px;
+            color: #999;
+        }
+        .cart-item-size {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+        .cart-item-price {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s;
+            border-radius: 4px;
+        }
+        .quantity-btn:hover {
+            border-color: #000;
+            background: #000;
+            color: #fff;
+        }
+        .quantity-value {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 500;
+        }
+        .cart-item-remove {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #999;
+            transition: color 0.2s;
+        }
+        .cart-item-remove:hover {
+            color: #ff4444;
+        }
+        .cart-summary {
+            background: #f8f8f8;
+            padding: 25px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        .cart-summary h3 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #666;
+        }
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .checkout-btn {
+            width: 100%;
+            padding: 14px;
+            background: #000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            transition: background 0.2s;
+        }
+        .checkout-btn:hover {
+            background: #333;
+        }
+        .continue-btn {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .continue-btn:hover {
+            color: #000;
+        }
+        .cart-empty {
+            text-align: center;
+            padding: 60px;
+            background: #f8f8f8;
+            border-radius: 12px;
+            grid-column: 1/-1;
+        }
+        .cart-empty i {
+            font-size: 64px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        .cart-empty h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 968px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+            .cart-header {
+                display: none;
+            }
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+                gap: 15px;
+                position: relative;
+            }
+            .cart-item-price {
+                grid-column: 2;
+            }
+            .cart-item-quantity {
+                grid-column: 2;
+                justify-content: flex-start;
+            }
+            .cart-item-remove {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            .cart-summary {
+                position: static;
+            }
+        }
+        @media (max-width: 768px) {
+            .cart-hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Шапка сайта -->
+        <header class="site-header">
+            <div class="logo">
+                <h1>LEADERSHIP</h1>
+                <span class="logo-sub">PARIS · LONDON · MOSCOW</span>
+            </div>
+            <div class="header-search">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="ПОИСК ПО КАТАЛОГУ...">
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">ГЛАВНАЯ</a>
+                <a href="catalog.html">КАТАЛОГ</a>
+                <a href="about.html">О БРЕНДЕ</a>
+                <a href="shops.html">МАГАЗИНЫ</a>
+                <a href="contacts.html">КОНТАКТЫ</a>
+                <a href="favorites.html" class="favorites-link">
+                    ИЗБРАННОЕ
+                    <span class="cart-count" id="favoritesCount">0</span>
+                </a>
+            </nav>
+            <div class="header-actions">
+                <div class="header-icons">
+                    <span class="header-icon" onclick="window.location.href='profile.html'">👤</span>
+                    <span class="header-icon" onclick="window.location.href='cart.html'" style="position: relative;">
+                        🛒
+                        <span class="cart-count" id="cartCount">0</span>
+                    </span>
+                </div>
+                <button class="btn-primary" id="authBtn">ВОЙТИ</button>
+            </div>
+        </header>
+    </div>
+
+    <!-- Hero секция с тематическим фоном -->
+    <div class="cart-hero">
+        <h1>КОРЗИНА</h1>
+        <p>Ваши выбранные товары</p>
+    </div>
+
+    <div class="cart-container" id="cartContainer"></div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">LEADERSHIP</a>
+                    <p class="footer-desc">Элегантная мужская одежда с 1984 года. Французский шик и итальянское качество в каждом изделии.</p>
+                    <div class="social-links">
+                        <a href="https://vk.com" class="social-link" onclick="openSocial('vk')"><i class="fab fa-vk"></i></a>
+                        <a href="https://pinterest.com" class="social-link" onclick="openSocial('pinterest')"><i class="fab fa-pinterest"></i></a>
+                        <a href="https://max.ru" class="social-link" onclick="openSocial('max')"><i class="fas fa-m"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>КАТАЛОГ</h4>
+                    <ul>
+                        <li><a href="catalog.html?category=suits">Костюмы</a></li>
+                        <li><a href="catalog.html?category=jackets">Пиджаки</a></li>
+                        <li><a href="catalog.html?category=trousers">Брюки</a></li>
+                        <li><a href="catalog.html?category=shirts">Рубашки</a></li>
+                        <li><a href="catalog.html?category=outerwear">Верхняя одежда</a></li>
+                        <li><a href="catalog.html?category=accessories">Аксессуары</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>ИНФОРМАЦИЯ</h4>
+                    <ul>
+                        <li><a href="about.html">О бренде</a></li>
+                        <li><a href="shops.html">Магазины</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="return.html">Возврат товара</a></li>
+                        <li><a href="size-guide.html">Таблица размеров</a></li>
+                        <li><a href="track-order.html">Отследить заказ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>КОНТАКТЫ</h4>
+                    <ul class="contact-list">
+                        <li><i class="fas fa-map-marker-alt"></i><span>Москва, Тверская 15</span></li>
+                        <li><i class="fas fa-clock"></i><span>Ежедневно 10:00 - 22:00</span></li>
+                        <li><i class="fas fa-phone-alt"></i><span>8 (800) 123-45-67</span></li>
+                        <li><i class="fas fa-envelope"></i><a href="mailto:info@leadership.ru">info@leadership.ru</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 LEADERSHIP. ALL RIGHTS RESERVED. PARIS · LONDON · MOSCOW</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============== ДАННЫЕ ТОВАРОВ ДЛЯ КАРТИНОК ==============
+        const productsData = {
+            1: { name: "Костюм классический черный", category: "Костюмы", price: 34990, image: "images/jpg/классичкостюмчерный.jpg" },
+            2: { name: "Костюм деловой синий", category: "Костюмы", price: 45990, image: "images/jpg/костюмделовсиний.jpg" },
+            3: { name: "Костюм серый", category: "Костюмы", price: 38990, image: "images/jpg/костюмсерый.jpg" },
+            4: { name: "Пиджак черный", category: "Пиджаки", price: 22500, image: "images/jpg/пиджакчерный.jpg" },
+            5: { name: "Пиджак бежевый", category: "Пиджаки", price: 18900, image: "images/jpg/пиджакбежевый.jpg" },
+            6: { name: "Брюки черные", category: "Брюки", price: 8900, image: "images/jpg/брюкичерные.jpg" },
+            7: { name: "Брюки бежевые", category: "Брюки", price: 6900, image: "images/jpg/брюкибежевые.jpg" },
+            8: { name: "Рубашка белая", category: "Рубашки", price: 4900, image: "images/jpg/рубашкабелая.jpg" },
+            9: { name: "Рубашка голубая", category: "Рубашки", price: 5900, image: "images/jpg/рубашкаголубая.jpg" },
+            10: { name: "Ремень кожаный", category: "Аксессуары", price: 5900, image: "images/jpg/ременькожаный.jpg" },
+            11: { name: "Галстук шелковый", category: "Аксессуары", price: 3900, image: "images/jpg/галстукшелковый.jpg" }
+        };
+
+        // ============== ФУНКЦИИ КОРЗИНЫ ==============
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        function updateCounters() {
+            const favSpan = document.getElementById('favoritesCount');
+            if (favSpan) {
+                favSpan.textContent = favorites.length;
+                favSpan.style.display = favorites.length > 0 ? 'inline-flex' : 'none';
+            }
+            const cartSpan = document.getElementById('cartCount');
+            if (cartSpan) {
+                cartSpan.textContent = cart.length;
+                cartSpan.style.display = cart.length > 0 ? 'inline-flex' : 'none';
+            }
+        }
+
+        function updateItemQuantity(id, size, delta) {
+            let itemIndex = -1;
+            for (let i = 0; i < cart.length; i++) {
+                if (cart[i].id === id && (cart[i].size || 'M') === size) {
+                    itemIndex = i;
+                    break;
+                }
+            }
+            
+            if (itemIndex !== -1) {
+                const newQuantity = (cart[itemIndex].quantity || 1) + delta;
+                
+                if (newQuantity <= 0) {
+                    cart.splice(itemIndex, 1);
+                    showNotification('Товар удален из корзины', 'info');
+                } else {
+                    cart[itemIndex].quantity = newQuantity;
+                    showNotification('Количество обновлено', 'info');
+                }
+                
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCart();
+                updateCounters();
+            }
+        }
+
+        function removeCartItem(id, size) {
+            cart = cart.filter(item => !(item.id === id && (item.size || 'M') === size));
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+            updateCounters();
+            showNotification('Товар удален из корзины', 'info');
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartContainer');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="cart-empty">
+                        <i class="fas fa-shopping-bag"></i>
+                        <h2>Ваша корзина пуста</h2>
+                        <p>Добавьте товары из каталога</p>
+                        <a href="catalog.html" class="btn-primary" style="display: inline-block; margin-top: 20px; text-decoration: none;">ПЕРЕЙТИ В КАТАЛОГ</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const groupedItems = {};
+            cart.forEach(item => {
+                const key = `${item.id}_${item.size || 'M'}`;
+                if (groupedItems[key]) {
+                    groupedItems[key].quantity += (item.quantity || 1);
+                } else {
+                    groupedItems[key] = {
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        image: item.image || productsData[item.id]?.image,
+                        category: item.category,
+                        size: item.size || 'M',
+                        quantity: item.quantity || 1
+                    };
+                }
+            });
+            
+            const cartItems = Object.values(groupedItems);
+            const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            container.innerHTML = `
+                <div class="cart-items">
+                    <div class="cart-header">
+                        <span>Товар</span>
+                        <span></span>
+                        <span>Цена</span>
+                        <span>Количество</span>
+                        <span></span>
+                    </div>
+                    ${cartItems.map(item => `
+                        <div class="cart-item" data-id="${item.id}" data-size="${item.size}">
+                            <img src="${item.image || 'https://placehold.co/80x100/f5f5f5/999?text=Фото'}" alt="${item.name}" class="cart-item-image" onerror="this.src='https://placehold.co/80x100/f5f5f5/999?text=Фото'">
+                            <div class="cart-item-info">
+                                <h3>${item.name}</h3>
+                                <div class="cart-item-category">${item.category}</div>
+                                <div class="cart-item-size">Размер: ${item.size}</div>
+                            </div>
+                            <div class="cart-item-price">${item.price.toLocaleString()} ₽</div>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn" onclick="updateItemQuantity(${item.id}, '${item.size}', -1)">-</button>
+                                <span class="quantity-value">${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateItemQuantity(${item.id}, '${item.size}', 1)">+</button>
+                            </div>
+                            <button class="cart-item-remove" onclick="removeCartItem(${item.id}, '${item.size}')">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="cart-summary">
+                    <h3>СУММА ЗАКАЗА</h3>
+                    <div class="summary-row">
+                        <span>Товары (${totalItems} шт.)</span>
+                        <span>${subtotal.toLocaleString()} ₽</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Доставка</span>
+                        <span>Бесплатно</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>ИТОГО</span>
+                        <span>${subtotal.toLocaleString()} ₽</span>
+                    </div>
+                    <button class="checkout-btn" onclick="checkout()">ОФОРМИТЬ ЗАКАЗ</button>
+                    <a href="catalog.html" class="continue-btn">Продолжить покупки</a>
+                </div>
+            `;
+        }
+
+        // ============== ГЕНЕРАЦИЯ НОМЕРА ЗАКАЗА ==============
+        function generateOrderNumber() {
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const letter1 = letters.charAt(Math.floor(Math.random() * letters.length));
+            const letter2 = letters.charAt(Math.floor(Math.random() * letters.length));
+            const numbers = Math.floor(Math.random() * 90000) + 10000;
+            return `${letter1}${letter2}-${numbers}`;
+        }
+
+        function isUniqueOrderNumber(orderNumber, existingOrders) {
+            return !existingOrders.some(order => order.number === orderNumber);
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Корзина пуста', 'error');
+                return;
+            }
+            
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                showNotification('Пожалуйста, войдите в аккаунт', 'info');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            let existingOrders = JSON.parse(localStorage.getItem('userOrders')) || [];
+            
+            let orderNumber;
+            let attempts = 0;
+            do {
+                orderNumber = generateOrderNumber();
+                attempts++;
+            } while (!isUniqueOrderNumber(orderNumber, existingOrders) && attempts < 10);
+            
+            const userData = JSON.parse(currentUser);
+            
+            const order = {
+                id: Date.now(),
+                number: orderNumber,
+                date: new Date().toLocaleDateString('ru-RU', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                }),
+                status: 'processing',
+                statusText: 'ОБРАБАТЫВАЕТСЯ',
+                items: cart.map(item => ({
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    quantity: item.quantity || 1,
+                    size: item.size || 'M',
+                    image: item.image
+                })),
+                total: cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0),
+                userEmail: userData.email,
+                userName: userData.name || userData.email?.split('@')[0] || 'Пользователь'
+            };
+            
+            existingOrders.unshift(order);
+            localStorage.setItem('userOrders', JSON.stringify(existingOrders));
+            
+            showNotification(`Заказ №${orderNumber} оформлен! Спасибо за покупку!`, 'success');
+            
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            renderCart();
+            updateCounters();
+        }
+
+        function showNotification(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast-notification ${type}`;
+            toast.textContent = message;
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                background: #1a1a1a;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-size: 13px;
+                z-index: 10001;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                animation: slideIn 0.3s ease;
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // ============== ПОИСК ==============
+        function performGlobalSearch() {
+            const searchInput = document.getElementById('searchInput');
+            if (!searchInput) return;
+            const query = searchInput.value.trim();
+            if (!query) { alert('Введите поисковый запрос'); return; }
+            localStorage.setItem('globalSearchQuery', query);
+            window.location.href = 'catalog.html?search=' + encodeURIComponent(query);
+        }
+
+        function setupSearchOnEnter() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        performGlobalSearch();
+                    }
+                });
+            }
+            const searchIcon = document.querySelector('.search-icon');
+            if (searchIcon) searchIcon.addEventListener('click', performGlobalSearch);
+        }
+
+        // ============== АВТОРИЗАЦИЯ ==============
+        function checkAuthState() {
+            const currentUser = localStorage.getItem('currentUser');
+            const authBtn = document.getElementById('authBtn');
+            if (authBtn) {
+                if (currentUser) {
+                    authBtn.textContent = 'ВЫЙТИ';
+                    authBtn.onclick = function() {
+                        if (confirm('Вы уверены, что хотите выйти?')) {
+                            localStorage.removeItem('currentUser');
+                            showNotification('Вы вышли из аккаунта', 'info');
+                            setTimeout(() => window.location.href = 'index.html', 1500);
+                        }
+                    };
+                } else {
+                    authBtn.textContent = 'ВОЙТИ';
+                    authBtn.onclick = () => window.location.href = 'login.html';
+                }
+            }
+        }
+
+        // ============== ИНИЦИАЛИЗАЦИЯ ==============
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCart();
+            updateCounters();
+            checkAuthState();
+            setupSearchOnEnter();
+        });
+    </script>
+
+    <style>
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        .toast-notification.success { border-left: 4px solid #4CAF50; }
+        .toast-notification.info { border-left: 4px solid #2196F3; }
+        .toast-notification.error { border-left: 4px solid #f44336; }
+        .favorites-link { position: relative; }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background: #000;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .header-icon { position: relative; }
+    </style>
+</body>
+</html>

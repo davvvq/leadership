@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadership — Главная</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Шапка сайта -->
+        <header class="site-header">
+            <div class="logo">
+                <h1>LEADERSHIP</h1>
+                <span class="logo-sub">PARIS · LONDON · MOSCOW</span>
+            </div>
+
+            <!-- Поиск -->
+            <div class="header-search">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="ПОИСК ПО КАТАЛОГУ...">
+            </div>
+
+            <!-- Навигация -->
+            <nav class="main-nav">
+                <a href="index.html" class="active">ГЛАВНАЯ</a>
+                <a href="catalog.html">КАТАЛОГ</a>
+                <a href="about.html">О БРЕНДЕ</a>
+                <a href="shops.html">МАГАЗИНЫ</a>
+                <a href="contacts.html">КОНТАКТЫ</a>
+                <a href="favorites.html" class="favorites-link">
+                    ИЗБРАННОЕ
+                    <span class="cart-count" id="favoritesCount">0</span>
+                </a>
+            </nav>
+
+            <!-- Иконки и кнопка входа -->
+            <div class="header-actions">
+                <div class="header-icons">
+                    <span class="header-icon" onclick="window.location.href='profile.html'"
+                        title="Личный кабинет">👤</span>
+                    <span class="header-icon" onclick="window.location.href='cart.html'" title="Корзина"
+                        style="position: relative;">
+                        🛒
+                        <span class="cart-count" id="cartCount">0</span>
+                    </span>
+                </div>
+                <button class="btn-primary" id="authBtn">ВОЙТИ</button>
+            </div>
+        </header>
+
+        <!-- Главный баннер Leadership -->
+        <section class="hero">
+            <div class="hero-slider">
+                <div class="hero-slide active">
+                    <div class="hero-content">
+                        <span class="hero-subtitle">НОВАЯ КОЛЛЕКЦИЯ 2025</span>
+                        <span class="hero-sale-badge">UP TO 50% SALE</span>
+                        <h1 class="hero-title">LEADERSHIP</h1>
+                        <div class="hero-discount-badges">
+                            <span class="discount-badge">-30%</span>
+                            <span class="discount-badge">-50%</span>
+                        </div>
+                        <a href="catalog.html" class="btn-primary">ПЕРЕЙТИ К ПОКУПКАМ</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- История бренда Leadership -->
+        <div class="brand-story">
+            <div class="vertical-text" aria-hidden="true">EST. 1984</div>
+            <div class="story-content">
+                <h2>ИСТОРИЯ BRAND LEADERSHIP</h2>
+                <p>Бренд Leadership появился в 1984 году. Его создателями стали бывшие владельцы Hugo Boss Йохан и Уве
+                    Холли. Они купили фабрику по производству пальто и привнесли новаторскую ноту в моду, показав миру,
+                    какой стильной и удобной может быть мужская одежда.</p>
+                <p>В 2002 году компания Leadership награждена долгожданной премией текстильной промышленности «Приз
+                    Форума» в номинации «Промышленность». Приз признан выдающимся достижением, которые имеют особое
+                    влияние на развитие текстильной промышленности, и выделен в качестве образцового.</p>
+                <button class="btn-outline" onclick="window.location.href='about.html'" style="margin-top: 20px;">
+                    ПОДРОБНЕЕ О БРЕНДЕ
+                </button>
+            </div>
+        </div>
+
+        <!-- ============== НОВЫЕ ПОСТУПЛЕНИЯ ============== -->
+        <section class="new-arrivals">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Новые поступления</h2>
+                    <p class="section-subtitle">Свежие модели этого сезона</p>
+                </div>
+                <div class="products-grid" id="newArrivalsGrid">
+                    <!-- Карточка 1: Костюм классический черный-->
+                    <div class="product-card" data-id="1" data-category="suits" data-price="34990"
+                        data-name="Костюм классический черный">
+                        <div class="product-image">
+                            <img src="images/jpg/классичкостюмчерный.jpg" alt="Костюм классический черный">
+                            <div class="product-badge">new</div>
+                            <button class="quick-view" onclick="quickView(1)">БЫСТРЫЙ ПРОСМОТР</button>
+                        </div>
+                        <div class="product-info">
+                            <h3>Костюм классический черный</h3>
+                            <div class="product-category">ДЕЛОВАЯ ОДЕЖДА</div>
+                            <div class="product-price">
+                                <span class="current-price">34 990 ₽</span>
+                                <span class="old-price">39 990 ₽</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn-add-to-cart" data-id="1">В КОРЗИНУ</button>
+                                <button class="btn-favorite" data-id="1">🤍</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 2: Пиджак шерстяной -->
+                    <div class="product-card" data-id="4" data-category="jackets" data-price="22500"
+                        data-name="Пиджак черный">
+                        <div class="product-image">
+                            <img src="images/jpg/пиджакчерный.jpg" alt="Пиджак черный">
+                            <button class="quick-view" onclick="quickView(4)">БЫСТРЫЙ ПРОСМОТР</button>
+                        </div>
+                        <div class="product-info">
+                            <h3>Пиджак шерстяной</h3>
+                            <div class="product-category">ПИДЖАКИ</div>
+                            <div class="product-price">
+                                <span class="current-price">22 500 ₽</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn-add-to-cart" onclick="addToCart(4)">В КОРЗИНУ</button>
+                                <button class="btn-favorite" onclick="toggleFavorite(4)">🤍</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 3: Брюки классические -->
+                    <div class="product-card" data-id="6" data-category="trousers" data-price="8900"
+                        data-name="Брюки черные">
+                        <div class="product-image">
+                            <img src="images/jpg/брюкичерные.jpg" alt="Брюки черные">
+                            <div class="product-badge">-15%</div>
+                            <button class="quick-view" onclick="quickView(6)">БЫСТРЫЙ ПРОСМОТР</button>
+                        </div>
+                        <div class="product-info">
+                            <h3>Брюки классические</h3>
+                            <div class="product-category">БРЮКИ</div>
+                            <div class="product-price">
+                                <span class="current-price">12 900 ₽</span>
+                                <span class="old-price">15 900 ₽</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn-add-to-cart" onclick="addToCart(6)">В КОРЗИНУ</button>
+                                <button class="btn-favorite" onclick="toggleFavorite(6)">🤍</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 4: Рубашка хлопковая -->
+                    <div class="product-card" data-id="8" data-category="shirts" data-price="4900"
+                        data-name="Рубашка белая">
+                        <div class="product-image">
+                            <img src="images/jpg/рубашкабелая.jpg" alt="Рубашка белая">
+                            <button class="quick-view" onclick="quickView(8)">БЫСТРЫЙ ПРОСМОТР</button>
+                        </div>
+                        <div class="product-info">
+                            <h3>Рубашка хлопковая</h3>
+                            <div class="product-category">РУБАШКИ</div>
+                            <div class="product-price">
+                                <span class="current-price">7 990 ₽</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn-add-to-cart" onclick="addToCart(8)">В КОРЗИНУ</button>
+                                <button class="btn-favorite" onclick="toggleFavorite(8)">🤍</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="show-all-btn">
+                    <a href="catalog.html" class="btn-outline">+ ПОКАЗАТЬ ВСЕ ТОВАРЫ</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Преимущества -->
+        <section class="features">
+            <div class="feature-item">
+                <div class="feature-icon">🚚</div>
+                <h4>Бесплатная доставка</h4>
+                <p>При заказе от 15 000 ₽</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">↩️</div>
+                <h4>Примерка перед покупкой</h4>
+                <p>14 дней на возврат</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">💎</div>
+                <h4>Оригинальная продукция</h4>
+                <p>Гарантия качества</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🎁</div>
+                <h4>Подарочная упаковка</h4>
+                <p>Для особых случаев</p>
+            </div>
+        </section>
+
+        <!-- ============== НОВОСТНАЯ РАССЫЛКА ============== -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-wrapper">
+                    <div class="newsletter-header">
+                        <h2 class="newsletter-title">НОВОСТНАЯ РАССЫЛКА</h2>
+                        <p class="newsletter-subtitle">ПОЛУЧАЙТЕ ЭКСКЛЮЗИВНЫЕ ПРЕДЛОЖЕНИЯ</p>
+                    </div>
+                    <form class="newsletter-form" id="newsletterForm" method="POST">
+                        <div class="newsletter-input-group">
+                            <input type="email" id="newsletterEmail" name="email" placeholder="ВАШ EMAIL" required>
+                            <button type="submit" class="newsletter-btn" id="newsletterSubmitBtn">ПОДПИСАТЬСЯ</button>
+                        </div>
+                        <input type="hidden" name="_subject" value="Новая подписка на новостную рассылку Leadership!">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" value="https://ваш-сайт.ru/thank-you.html">
+                        <input type="hidden" name="_to" value="kisievdavid8g@gmail.com">
+                    </form>
+                    <div id="newsletterMessage" class="newsletter-message"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Футер -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <a href="index.html" class="footer-logo">LEADERSHIP</a>
+                        <p class="footer-desc">Элегантная мужская одежда с 1984 года. Французский шик и итальянское
+                            качество в каждом изделии.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" onclick="openSocial('vk')"><i class="fab fa-vk"></i></a>
+                            <a href="#" class="social-link" onclick="openSocial('pinterest')"><i
+                                    class="fab fa-pinterest"></i></a>
+                            <a href="#" class="social-link" onclick="openSocial('max')"><i class="fas fa-m"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h4>КАТАЛОГ</h4>
+                        <ul>
+                            <li><a href="catalog.html?category=suits">Костюмы</a></li>
+                            <li><a href="catalog.html?category=jackets">Пиджаки</a></li>
+                            <li><a href="catalog.html?category=trousers">Брюки</a></li>
+                            <li><a href="catalog.html?category=shirts">Рубашки</a></li>
+                            <li><a href="catalog.html?category=outerwear">Верхняя одежда</a></li>
+                            <li><a href="catalog.html?category=accessories">Аксессуары</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>ИНФОРМАЦИЯ</h4>
+                        <ul>
+                            <li><a href="about.html">О бренде</a></li>
+                            <li><a href="shops.html">Магазины</a></li>
+                            <li><a href="contacts.html">Контакты</a></li>
+                            <li><a href="delivery.html">Доставка и оплата</a></li>
+                            <li><a href="return.html">Возврат товара</a></li>
+                            <li><a href="size-guide.html">Таблица размеров</a></li>
+                            <li><a href="track-order.html">Отследить заказ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>КОНТАКТЫ</h4>
+                        <ul class="contact-list">
+                            <li><i class="fas fa-map-marker-alt"></i><span>Москва, Тверская 15</span></li>
+                            <li><i class="fas fa-clock"></i><span>Ежедневно 10:00 - 22:00</span></li>
+                            <li><i class="fas fa-phone-alt"></i><span>8 (800) 123-45-67</span></li>
+                            <li><i class="fas fa-envelope"></i><a
+                                    href="mailto:info@leadership.ru">info@leadership.ru</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2025 LEADERSHIP. ALL RIGHTS RESERVED. PARIS · LONDON · MOSCOW</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ============== ОСНОВНЫЕ ФУНКЦИИ ==============
+
+        // Функция добавления в корзину с анимацией
+        function addToCart(productId) {
+            const productCard = document.querySelector(`.product-card[data-id="${productId}"]`);
+            if (!productCard) return;
+
+            // Анимация карточки
+            productCard.classList.add('added-to-cart');
+            setTimeout(() => {
+                productCard.classList.remove('added-to-cart');
+            }, 500);
+
+            // Анимация кнопки
+            const btn = document.querySelector(`.btn-add-to-cart[data-id="${productId}"]`);
+            if (btn) {
+                btn.classList.add('clicked');
+                setTimeout(() => {
+                    btn.classList.remove('clicked');
+                }, 200);
+            }
+
+            const product = {
+                id: productId,
+                name: productCard.getAttribute('data-name'),
+                price: parseInt(productCard.getAttribute('data-price')),
+                category: productCard.querySelector('.product-category')?.textContent || '',
+                image: productCard.getAttribute('data-image')
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            showNotification(`${product.name} добавлен в корзину 🛒`, 'success');
+            updateCounters();
+        }
+
+        // Функция избранного с анимацией
+        function toggleFavorite(productId) {
+            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            const index = favorites.indexOf(productId);
+
+            const btn = document.querySelector(`.btn-favorite[data-id="${productId}"]`);
+
+            if (index === -1) {
+                favorites.push(productId);
+                showNotification('Товар добавлен в избранное ❤️', 'success');
+                if (btn) {
+                    btn.classList.add('active');
+                    btn.innerHTML = '❤️';
+                }
+            } else {
+                favorites.splice(index, 1);
+                showNotification('Товар удален из избранного', 'info');
+                if (btn) {
+                    btn.classList.remove('active');
+                    btn.innerHTML = '🤍';
+                }
+            }
+
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            updateCounters();
+        }
+
+        function updateFavoriteButtons() {
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            document.querySelectorAll('.btn-favorite').forEach(btn => {
+                const productCard = btn.closest('.product-card');
+                if (productCard) {
+                    const productId = parseInt(productCard.getAttribute('data-id'));
+                    if (favorites.includes(productId)) {
+                        btn.classList.add('active');
+                        btn.innerHTML = '❤️';
+                    } else {
+                        btn.classList.remove('active');
+                        btn.innerHTML = '🤍';
+                    }
+                }
+            });
+        }
+
+        // ============== СЧЕТЧИКИ ==============
+        function updateCounters() {
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            const favSpan = document.getElementById('favoritesCount');
+            if (favSpan) {
+                favSpan.textContent = favorites.length;
+                favSpan.style.display = favorites.length > 0 ? 'inline-flex' : 'none';
+            }
+
+            const cartSpan = document.getElementById('cartCount');
+            if (cartSpan) {
+                cartSpan.textContent = cart.length;
+                cartSpan.style.display = cart.length > 0 ? 'inline-flex' : 'none';
+            }
+        }
+
+        // ============== БЫСТРЫЙ ПРОСМОТР ==============
+        const quickViewProducts = {
+            1: {
+                name: "Костюм классический черный",
+                category: "КОСТЮМЫ",
+                price: 34990,
+                oldPrice: 41990,
+                image: "images/jpg/классикостюмчерный.jpg",
+                desc: "Элегантный классический костюм из высококачественной шерсти.",
+                sizes: ["XS", "S", "M", "L", "XL", "XXL"]
+            },
+            4: {
+                name: "Пиджак черный",
+                category: "ПИДЖАКИ",
+                price: 22500,
+                oldPrice: null,
+                image: "images/jpg/пиджакчерный.jpg",
+                desc: "Элегантный черный пиджак.",
+                sizes: ["S", "M", "L", "XL"]
+            },
+            6: {
+                name: "Брюки черные",
+                category: "БРЮКИ",
+                price: 8900,
+                oldPrice: null,
+                image: "images/jpg/брюкичерные.jpg",
+                desc: "Классические черные брюки.",
+                sizes: ["S", "M", "L", "XL"]
+            },
+            8: {
+                name: "Рубашка белая",
+                category: "РУБАШКИ",
+                price: 4900,
+                oldPrice: null,
+                image: "images/jpg/рубашкабелая.jpg",
+                desc: "Классическая белая рубашка.",
+                sizes: ["S", "M", "L", "XL", "XXL"]
+            }
+        };
+
+        function quickView(productId) {
+            const product = quickViewProducts[productId];
+            if (!product) {
+                console.error('Товар не найден:', productId);
+                return;
+            }
+
+            let modal = document.getElementById('quickViewModal');
+
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'quickViewModal';
+                modal.className = 'quick-view-modal';
+                document.body.appendChild(modal);
+
+                const style = document.createElement('style');
+                style.textContent = `
+                    .quick-view-modal {
+                        display: none;
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0,0,0,0.85);
+                        z-index: 10000;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    .quick-view-modal.show { display: flex; }
+                    .quick-view-content {
+                        background: white;
+                        width: 90%;
+                        max-width: 1000px;
+                        max-height: 85vh;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        position: relative;
+                        display: flex;
+                        flex-wrap: wrap;
+                    }
+                    .quick-view-close {
+                        position: absolute;
+                        top: 15px;
+                        right: 15px;
+                        background: black;
+                        color: white;
+                        border: none;
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        z-index: 10;
+                        font-size: 18px;
+                    }
+                    .quick-view-image { flex: 1; min-width: 280px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; }
+                    .quick-view-image img { width: 100%; height: auto; max-height: 85vh; object-fit: contain; }
+                    .quick-view-info { flex: 1; padding: 25px; display: flex; flex-direction: column; }
+                    .quick-view-category { font-size: 11px; color: #999; letter-spacing: 2px; margin-bottom: 10px; }
+                    .quick-view-title { font-size: 22px; font-weight: 500; margin-bottom: 15px; }
+                    .quick-view-price { margin-bottom: 20px; }
+                    .quick-view-current-price { font-size: 22px; font-weight: 600; }
+                    .quick-view-old-price { font-size: 14px; color: #999; text-decoration: line-through; margin-left: 10px; }
+                    .quick-view-desc { color: #666; line-height: 1.5; margin-bottom: 20px; font-size: 13px; }
+                    .quick-view-sizes { margin-bottom: 20px; }
+                    .quick-view-sizes h4 { font-size: 13px; margin-bottom: 10px; }
+                    .quick-view-size-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+                    .quick-view-size-btn { width: 45px; height: 45px; border: 1px solid #ddd; background: white; cursor: pointer; }
+                    .quick-view-size-btn.selected { background: black; color: white; border-color: black; }
+                    .quick-view-actions { display: flex; gap: 15px; margin-top: auto; }
+                    .quick-view-cart { flex: 2; padding: 12px; background: black; color: white; border: none; cursor: pointer; }
+                    .quick-view-fav { flex: 1; padding: 12px; background: white; border: 1px solid #ddd; cursor: pointer; }
+                    .quick-view-fav.active { background: #fff0f0; border-color: #ff4444; color: #ff4444; }
+                    @media (max-width: 768px) { .quick-view-content { flex-direction: column; } }
+                `;
+                document.head.appendChild(style);
+            }
+
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            const isFav = favorites.includes(productId);
+
+            modal.innerHTML = `
+                <div class="quick-view-content">
+                    <button class="quick-view-close" onclick="closeQuickView()">✕</button>
+                    <div class="quick-view-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://placehold.co/600x800/f5f5f5/999?text=Фото'">
+                    </div>
+                    <div class="quick-view-info">
+                        <div class="quick-view-category">${product.category}</div>
+                        <h2 class="quick-view-title">${product.name}</h2>
+                        <div class="quick-view-price">
+                            <span class="quick-view-current-price">${product.price.toLocaleString()} ₽</span>
+                            ${product.oldPrice ? `<span class="quick-view-old-price">${product.oldPrice.toLocaleString()} ₽</span>` : ''}
+                        </div>
+                        <p class="quick-view-desc">${product.desc}</p>
+                        <div class="quick-view-sizes">
+                            <h4>Выберите размер</h4>
+                            <div class="quick-view-size-buttons" id="quickViewSizes">
+                                ${product.sizes.map(size => `<button class="quick-view-size-btn" data-size="${size}">${size}</button>`).join('')}
+                            </div>
+                        </div>
+                        <div class="quick-view-actions">
+                            <button class="quick-view-cart" id="quickViewAddToCart">ДОБАВИТЬ В КОРЗИНУ</button>
+                            <button class="quick-view-fav ${isFav ? 'active' : ''}" id="quickViewFavoriteBtn">${isFav ? '❤️ В ИЗБРАННОМ' : '🤍 В ИЗБРАННОЕ'}</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const firstSizeBtn = modal.querySelector('.quick-view-size-btn');
+            if (firstSizeBtn) firstSizeBtn.classList.add('selected');
+            let selectedSize = product.sizes[0];
+
+            modal.querySelectorAll('.quick-view-size-btn').forEach(btn => {
+                btn.onclick = function () {
+                    modal.querySelectorAll('.quick-view-size-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedSize = this.dataset.size;
+                };
+            });
+
+            document.getElementById('quickViewAddToCart').onclick = () => {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart.push({
+                    id: productId,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    size: selectedSize
+                });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCounters();
+                showNotification(`${product.name} добавлен в корзину! Размер: ${selectedSize}`, 'success');
+                closeQuickView();
+            };
+
+            document.getElementById('quickViewFavoriteBtn').onclick = () => {
+                let favs = JSON.parse(localStorage.getItem('favorites')) || [];
+                const btn = document.getElementById('quickViewFavoriteBtn');
+                if (favs.includes(productId)) {
+                    favs = favs.filter(f => f !== productId);
+                    btn.classList.remove('active');
+                    btn.innerHTML = '🤍 В ИЗБРАННОЕ';
+                    showNotification('Удалено из избранного', 'info');
+                } else {
+                    favs.push(productId);
+                    btn.classList.add('active');
+                    btn.innerHTML = '❤️ В ИЗБРАННОМ';
+                    showNotification('Добавлено в избранное ❤️', 'success');
+                }
+                localStorage.setItem('favorites', JSON.stringify(favs));
+                updateFavoriteButtons();
+                updateCounters();
+            };
+
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeQuickView() {
+            const modal = document.getElementById('quickViewModal');
+            if (modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+
+        document.addEventListener('click', function (e) {
+            const modal = document.getElementById('quickViewModal');
+            if (e.target === modal) closeQuickView();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeQuickView();
+        });
+
+        function showNotification(message, type = 'info') {
+            // Удаляем предыдущее уведомление
+            const oldNotification = document.querySelector('.notification');
+            if (oldNotification) {
+                oldNotification.classList.add('hide');
+                setTimeout(() => oldNotification.remove(), 300);
+            }
+
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `<span>${message}</span>`;
+            document.body.appendChild(notification);
+
+            // Добавляем иконку в зависимости от типа
+            let icon = '';
+            if (type === 'success') icon = '✓';
+            else if (type === 'info') icon = 'ℹ';
+            else if (type === 'error') icon = '✕';
+
+            // Автоматическое удаление через 3 секунды
+            setTimeout(() => {
+                notification.classList.add('hide');
+                setTimeout(() => {
+                    if (notification && notification.remove) notification.remove();
+                }, 300);
+            }, 3000);
+        }
+        // ============== ПОИСК ==============
+        function performGlobalSearch() {
+            const searchInput = document.getElementById('searchInput');
+            if (!searchInput) return;
+            const query = searchInput.value.trim();
+            if (!query) {
+                alert('Введите поисковый запрос');
+                return;
+            }
+            localStorage.setItem('globalSearchQuery', query);
+            window.location.href = 'catalog.html?search=' + encodeURIComponent(query);
+        }
+
+        function setupSearchOnEnter() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        performGlobalSearch();
+                    }
+                });
+            }
+        }
+
+        function setupSearchIcon() {
+            const searchIcon = document.querySelector('.search-icon');
+            if (searchIcon) {
+                searchIcon.addEventListener('click', function () {
+                    performGlobalSearch();
+                });
+            }
+        }
+
+        // ============== АВТОРИЗАЦИЯ ==============
+        function checkAuthState() {
+            const currentUser = localStorage.getItem('currentUser');
+            const authBtn = document.getElementById('authBtn');
+
+            if (authBtn) {
+                if (currentUser) {
+                    authBtn.textContent = 'ВЫЙТИ';
+                    authBtn.onclick = function () {
+                        if (confirm('Вы уверены, что хотите выйти?')) {
+                            localStorage.removeItem('currentUser');
+                            showNotification('Вы вышли из аккаунта', 'info');
+                            setTimeout(() => window.location.href = 'index.html', 1500);
+                        }
+                    };
+                } else {
+                    authBtn.textContent = 'ВОЙТИ';
+                    authBtn.onclick = function () {
+                        window.location.href = 'login.html';
+                    };
+                }
+            }
+        }
+
+        // ============== НОВОСТНАЯ РАССЫЛКА ==============
+        const newsletterForm = document.getElementById('newsletterForm');
+        const newsletterMessage = document.getElementById('newsletterMessage');
+
+        function showNewsletterMessage(message, type) {
+            if (!newsletterMessage) return;
+            newsletterMessage.textContent = message;
+            newsletterMessage.className = `newsletter-message ${type}`;
+            newsletterMessage.style.display = 'block';
+            setTimeout(() => {
+                if (newsletterMessage) {
+                    newsletterMessage.style.display = 'none';
+                    newsletterMessage.className = 'newsletter-message';
+                }
+            }, 5000);
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const emailInput = document.getElementById('newsletterEmail');
+                const email = emailInput.value.trim();
+                const submitBtn = document.getElementById('newsletterSubmitBtn');
+
+                if (!email) {
+                    showNewsletterMessage('Пожалуйста, введите ваш email', 'error');
+                    return;
+                }
+                if (!isValidEmail(email)) {
+                    showNewsletterMessage('Пожалуйста, введите корректный email адрес', 'error');
+                    return;
+                }
+
+                showNewsletterMessage('Отправка...', 'loading');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'ОТПРАВКА...';
+
+                try {
+                    const response = await fetch('https://formsubmit.co/ajax/kisievdavid8g@gmail.com', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            _subject: 'Новая подписка на новостную рассылку Leadership!',
+                            _captcha: 'false'
+                        })
+                    });
+
+                    if (response.ok) {
+                        showNewsletterMessage('Спасибо за подписку! Письмо отправлено на ' + email, 'success');
+                        emailInput.value = '';
+
+                        let subscribers = JSON.parse(localStorage.getItem('newsletter_subscribers')) || [];
+                        if (!subscribers.includes(email)) {
+                            subscribers.push(email);
+                            localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
+                        }
+                    } else {
+                        showNewsletterMessage('Ошибка при подписке. Попробуйте позже.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Ошибка:', error);
+                    showNewsletterMessage('Ошибка соединения. Попробуйте снова.', 'error');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'ПОДПИСАТЬСЯ';
+                }
+            });
+        }
+
+        // ============== СОЦИАЛЬНЫЕ СЕТИ ==============
+        function openSocial(network) {
+            const urls = {
+                'vk': 'https://vk.com',
+                'pinterest': 'https://pinterest.com',
+                'max': 'https://max.ru'
+            };
+            window.open(urls[network], '_blank');
+        }
+
+        // ============== ИНИЦИАЛИЗАЦИЯ ==============
+        document.addEventListener('DOMContentLoaded', function () {
+            updateCounters();
+            updateFavoriteButtons();
+            checkAuthState();
+            setupSearchOnEnter();
+            setupSearchIcon();
+        });
+    </script>
+
+    <style>
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .favorites-link {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background: #000;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+    </style>
+</body>
+
+</html>

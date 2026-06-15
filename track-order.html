@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отслеживание заказа | LEADERSHIP</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .track-container {
+            max-width: 600px;
+            margin: 80px auto;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid #f0f0f0;
+            background: #fff;
+        }
+        .track-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            margin: 20px 0;
+            font-family: 'Inter', sans-serif;
+        }
+        .track-btn {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+        }
+        .order-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f8f8;
+            text-align: left;
+            display: none;
+        }
+        .order-info.show {
+            display: block;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .status-processing { background: #FFC107; color: #333; }
+        .status-shipped { background: #2196F3; color: white; }
+        .status-delivered { background: #4CAF50; color: white; }
+        .status-cancelled { background: #f44336; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <div class="logo"><h1>LEADERSHIP</h1><span class="logo-sub">PARIS · LONDON · MOSCOW</span></div>
+            <div class="header-search"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="ПОИСК ПО КАТАЛОГУ..."></div>
+            <nav class="main-nav">
+                <a href="index.html">ГЛАВНАЯ</a>
+                <a href="catalog.html">КАТАЛОГ</a>
+                <a href="about.html">О БРЕНДЕ</a>
+                <a href="shops.html">МАГАЗИНЫ</a>
+                <a href="contacts.html">КОНТАКТЫ</a>
+                <a href="favorites.html" class="favorites-link">ИЗБРАННОЕ<span class="cart-count" id="favoritesCount">0</span></a>
+            </nav>
+            <div class="header-actions">
+                <div class="header-icons">
+                    <span class="header-icon" onclick="window.location.href='profile.html'">👤</span>
+                    <span class="header-icon" onclick="window.location.href='cart.html'">🛒<span class="cart-count" id="cartCount">0</span></span>
+                </div>
+                <button class="btn-primary" id="authBtn">ВОЙТИ</button>
+            </div>
+        </header>
+    </div>
+
+    <div class="track-container">
+        <h1>ОТСЛЕЖИВАНИЕ ЗАКАЗА</h1>
+        <p>Введите номер вашего заказа для получения информации о статусе доставки</p>
+        <input type="text" id="trackOrderNumber" class="track-input" placeholder="Например: LD-12345">
+        <button class="track-btn" onclick="trackOrderStatus()">ОТСЛЕДИТЬ</button>
+        <div id="orderInfo" class="order-info"></div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="footer-logo">LEADERSHIP</a>
+                <p class="footer-desc">Элегантная мужская одежда с 1984 года. Французский шик и итальянское качество в каждом изделии.</p>
+                <div class="social-links">
+                    <a href="https://vk.com" class="social-link" onclick="openSocial('vk')"><i class="fab fa-vk"></i></a>
+                    <a href="https://pinterest.com" class="social-link" onclick="openSocial('pinterest')"><i class="fab fa-pinterest"></i></a>
+                    <a href="https://max.ru" class="social-link" onclick="openSocial('max')"><i class="fas fa-m"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>КАТАЛОГ</h4>
+                <ul>
+                    <li><a href="catalog.html?category=suits">Костюмы</a></li>
+                    <li><a href="catalog.html?category=jackets">Пиджаки</a></li>
+                    <li><a href="catalog.html?category=trousers">Брюки</a></li>
+                    <li><a href="catalog.html?category=shirts">Рубашки</a></li>
+                    <li><a href="catalog.html?category=outerwear">Верхняя одежда</a></li>
+                    <li><a href="catalog.html?category=accessories">Аксессуары</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>ИНФОРМАЦИЯ</h4>
+                <ul>
+                    <li><a href="about.html">О бренде</a></li>
+                    <li><a href="shops.html">Магазины</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="delivery.html">Доставка и оплата</a></li>
+                    <li><a href="return.html">Возврат товара</a></li>
+                    <li><a href="size-guide.html">Таблица размеров</a></li>
+                    <li><a href="track-order.html">Отследить заказ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>КОНТАКТЫ</h4>
+                <ul class="contact-list">
+                    <li><i class="fas fa-map-marker-alt"></i><span>Москва, Тверская 15</span></li>
+                    <li><i class="fas fa-clock"></i><span>Ежедневно 10:00 - 22:00</span></li>
+                    <li><i class="fas fa-phone-alt"></i><span>8 (800) 123-45-67</span></li>
+                    <li><i class="fas fa-envelope"></i><a href="mailto:info@leadership.ru">info@leadership.ru</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 LEADERSHIP. ALL RIGHTS RESERVED. PARIS · LONDON · MOSCOW</p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        function trackOrderStatus() {
+            const orderNumber = document.getElementById('trackOrderNumber').value.trim().toUpperCase();
+            const orders = JSON.parse(localStorage.getItem('userOrders')) || [];
+            const order = orders.find(o => o.number === orderNumber);
+            const infoDiv = document.getElementById('orderInfo');
+            
+            if (!orderNumber) {
+                alert('Введите номер заказа');
+                return;
+            }
+            
+            if (order) {
+                const statusClass = `status-${order.status}`;
+                infoDiv.innerHTML = `
+                    <h3>Заказ ${order.number}</h3>
+                    <p><strong>Дата оформления:</strong> ${order.date}</p>
+                    <p><strong>Статус:</strong> <span class="status ${statusClass}">${order.statusText}</span></p>
+                    <p><strong>Сумма заказа:</strong> ${order.total.toLocaleString()} ₽</p>
+                    <p><strong>Товары:</strong></p>
+                    <ul>${order.items.map(item => `<li>${item.name} x ${item.quantity} — ${(item.price * item.quantity).toLocaleString()} ₽</li>`).join('')}</ul>
+                    <hr>
+                    <p>Если у вас есть вопросы по заказу, свяжитесь с нами: info@leadership.ru</p>
+                `;
+                infoDiv.classList.add('show');
+            } else {
+                infoDiv.innerHTML = `<p style="color:#f44336;">Заказ с номером ${orderNumber} не найден. Проверьте правильность номера.</p>`;
+                infoDiv.classList.add('show');
+            }
+        }
+        
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        document.getElementById('favoritesCount').textContent = favorites.length;
+        document.getElementById('cartCount').textContent = cart.length;
+    </script>
+</body>
+</html>

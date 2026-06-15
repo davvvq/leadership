@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблица размеров | LEADERSHIP</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            min-height: 500px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .size-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .size-table th,
+        .size-table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+
+        .size-table th {
+            background: #f8f8f8;
+            font-weight: 600;
+        }
+
+        .size-table tr:hover {
+            background: #fafafa;
+        }
+
+        .note {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .flex-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .cat-btn {
+            padding: 10px 25px;
+            background: none;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 30px;
+            font-family: inherit;
+        }
+
+        .cat-btn.active {
+            background: #000;
+            color: white;
+            border-color: #000;
+        }
+
+        @media (max-width: 768px) {
+
+            .size-table th,
+            .size-table td {
+                padding: 8px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="site-header">
+            <div class="logo">
+                <h1>LEADERSHIP</h1>
+                <span class="logo-sub">PARIS · LONDON · MOSCOW</span>
+            </div>
+            <div class="header-search">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="ПОИСК ПО КАТАЛОГУ...">
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">ГЛАВНАЯ</a>
+                <a href="catalog.html">КАТАЛОГ</a>
+                <a href="collections.html">КОЛЛЕКЦИИ</a>
+                <a href="blog.html">БЛОГ</a>
+                <a href="contacts.html">КОНТАКТЫ</a>
+                <a href="favorites.html" class="favorites-link">
+                    ИЗБРАННОЕ
+                    <span class="cart-count" id="favoritesCount" style="display:none;">0</span>
+                </a>
+            </nav>
+            <div class="header-actions">
+                <div class="header-icons">
+                    <span class="header-icon" onclick="window.location.href='profile.html'">👤</span>
+                    <span class="header-icon" onclick="window.location.href='cart.html'">
+                        🛒
+                        <span class="cart-count" id="cartCount" style="display:none;">0</span>
+                    </span>
+                </div>
+                <button class="btn-primary" id="authBtn">ВОЙТИ</button>
+            </div>
+        </header>
+    </div>
+
+    <div class="page-content">
+        <div class="page-header">
+            <h1>ТАБЛИЦА РАЗМЕРОВ</h1>
+            <p>Как правильно подобрать размер</p>
+        </div>
+
+        <div class="flex-buttons">
+            <button class="cat-btn active" onclick="showSizeTable('suits')">Костюмы / Пиджаки</button>
+            <button class="cat-btn" onclick="showSizeTable('shirts')">Рубашки</button>
+            <button class="cat-btn" onclick="showSizeTable('trousers')">Брюки</button>
+        </div>
+
+        <div id="suitsTable" class="size-table-container">
+            <table class="size-table">
+                <thead>
+                    <tr>
+                        <th>Российский размер</th>
+                        <th>Международный</th>
+                        <th>Обхват груди (см)</th>
+                        <th>Обхват талии (см)</th>
+                        <th>Обхват бедер (см)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>44</td>
+                        <td>XS</td>
+                        <td>86-90</td>
+                        <td>72-76</td>
+                        <td>90-94</td>
+                    </tr>
+                    <tr>
+                        <td>46</td>
+                        <td>S</td>
+                        <td>90-94</td>
+                        <td>76-80</td>
+                        <td>94-98</td>
+                    </tr>
+                    <tr>
+                        <td>48</td>
+                        <td>M</td>
+                        <td>94-98</td>
+                        <td>80-84</td>
+                        <td>98-102</td>
+                    </tr>
+                    <tr>
+                        <td>50</td>
+                        <td>L</td>
+                        <td>98-102</td>
+                        <td>84-88</td>
+                        <td>102-106</td>
+                    </tr>
+                    <tr>
+                        <td>52</td>
+                        <td>XL</td>
+                        <td>102-106</td>
+                        <td>88-92</td>
+                        <td>106-110</td>
+                    </tr>
+                    <tr>
+                        <td>54</td>
+                        <td>XXL</td>
+                        <td>106-110</td>
+                        <td>92-96</td>
+                        <td>110-114</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="shirtsTable" class="size-table-container" style="display:none">
+            <table class="size-table">
+                <thead>
+                    <tr>
+                        <th>Российский размер</th>
+                        <th>Международный</th>
+                        <th>Обхват шеи (см)</th>
+                        <th>Длина рукава (см)</th>
+                        <th>Обхват груди (см)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>37</td>
+                        <td>XS</td>
+                        <td>37-38</td>
+                        <td>60-62</td>
+                        <td>86-90</td>
+                    </tr>
+                    <tr>
+                        <td>38</td>
+                        <td>S</td>
+                        <td>38-39</td>
+                        <td>62-64</td>
+                        <td>90-94</td>
+                    </tr>
+                    <tr>
+                        <td>39</td>
+                        <td>M</td>
+                        <td>39-40</td>
+                        <td>64-66</td>
+                        <td>94-98</td>
+                    </tr>
+                    <tr>
+                        <td>41</td>
+                        <td>L</td>
+                        <td>41-42</td>
+                        <td>66-68</td>
+                        <td>98-102</td>
+                    </tr>
+                    <tr>
+                        <td>43</td>
+                        <td>XL</td>
+                        <td>43-44</td>
+                        <td>68-70</td>
+                        <td>102-106</td>
+                    </tr>
+                    <tr>
+                        <td>45</td>
+                        <td>XXL</td>
+                        <td>45-46</td>
+                        <td>70-72</td>
+                        <td>106-110</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="trousersTable" class="size-table-container" style="display:none">
+            <table class="size-table">
+                <thead>
+                    <tr>
+                        <th>Российский размер</th>
+                        <th>Международный</th>
+                        <th>Обхват талии (см)</th>
+                        <th>Обхват бедер (см)</th>
+                        <th>Длина по боковому шву (см)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>44</td>
+                        <td>XS</td>
+                        <td>72-76</td>
+                        <td>90-94</td>
+                        <td>104-106</td>
+                    </tr>
+                    <tr>
+                        <td>46</td>
+                        <td>S</td>
+                        <td>76-80</td>
+                        <td>94-98</td>
+                        <td>105-107</td>
+                    </tr>
+                    <tr>
+                        <td>48</td>
+                        <td>M</td>
+                        <td>80-84</td>
+                        <td>98-102</td>
+                        <td>106-108</td>
+                    </tr>
+                    <tr>
+                        <td>50</td>
+                        <td>L</td>
+                        <td>84-88</td>
+                        <td>102-106</td>
+                        <td>107-109</td>
+                    </tr>
+                    <tr>
+                        <td>52</td>
+                        <td>XL</td>
+                        <td>88-92</td>
+                        <td>106-110</td>
+                        <td>108-110</td>
+                    </tr>
+                    <tr>
+                        <td>54</td>
+                        <td>XXL</td>
+                        <td>92-96</td>
+                        <td>110-114</td>
+                        <td>109-111</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="note">
+            <h3><i class="fas fa-ruler"></i> Как правильно снять мерки?</h3>
+            <p><strong>Обхват груди:</strong> измеряется по самым выступающим точкам груди.<br>
+                <strong>Обхват талии:</strong> измеряется по самому узкому месту торса.<br>
+                <strong>Обхват бедер:</strong> измеряется по самым выступающим точкам ягодиц.<br>
+                <strong>Длина рукава:</strong> измеряется от плечевого шва до запястья.
+            </p>
+            <p>Если ваши параметры находятся между размерами, рекомендуем выбрать больший размер.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="footer-logo">LEADERSHIP</a>
+                <p class="footer-desc">Элегантная мужская одежда с 1984 года. Французский шик и итальянское качество в каждом изделии.</p>
+                <div class="social-links">
+                    <a href="https://vk.com" class="social-link" onclick="openSocial('vk')"><i class="fab fa-vk"></i></a>
+                    <a href="https://pinterest.com" class="social-link" onclick="openSocial('pinterest')"><i class="fab fa-pinterest"></i></a>
+                    <a href="https://max.ru" class="social-link" onclick="openSocial('max')"><i class="fas fa-m"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>КАТАЛОГ</h4>
+                <ul>
+                    <li><a href="catalog.html?category=suits">Костюмы</a></li>
+                    <li><a href="catalog.html?category=jackets">Пиджаки</a></li>
+                    <li><a href="catalog.html?category=trousers">Брюки</a></li>
+                    <li><a href="catalog.html?category=shirts">Рубашки</a></li>
+                    <li><a href="catalog.html?category=outerwear">Верхняя одежда</a></li>
+                    <li><a href="catalog.html?category=accessories">Аксессуары</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>ИНФОРМАЦИЯ</h4>
+                <ul>
+                    <li><a href="about.html">О бренде</a></li>
+                    <li><a href="shops.html">Магазины</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="delivery.html">Доставка и оплата</a></li>
+                    <li><a href="return.html">Возврат товара</a></li>
+                    <li><a href="size-guide.html">Таблица размеров</a></li>
+                    <li><a href="track-order.html">Отследить заказ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>КОНТАКТЫ</h4>
+                <ul class="contact-list">
+                    <li><i class="fas fa-map-marker-alt"></i><span>Москва, Тверская 15</span></li>
+                    <li><i class="fas fa-clock"></i><span>Ежедневно 10:00 - 22:00</span></li>
+                    <li><i class="fas fa-phone-alt"></i><span>8 (800) 123-45-67</span></li>
+                    <li><i class="fas fa-envelope"></i><a href="mailto:info@leadership.ru">info@leadership.ru</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 LEADERSHIP. ALL RIGHTS RESERVED. PARIS · LONDON · MOSCOW</p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        function showSizeTable(type) {
+            document.querySelectorAll('.size-table-container').forEach(el => el.style.display = 'none');
+            document.getElementById(type + 'Table').style.display = 'block';
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function updateCounters() {
+            const favCount = document.getElementById('favoritesCount');
+            if (favCount) {
+                favCount.textContent = favorites.length;
+                favCount.style.display = favorites.length > 0 ? 'flex' : 'none';
+            }
+            const cartCount = document.getElementById('cartCount');
+            if (cartCount) {
+                cartCount.textContent = cart.length;
+                cartCount.style.display = cart.length > 0 ? 'flex' : 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', updateCounters);
+    </script>
+    <script>
+      function performGlobalSearch() {
+    const searchInput = document.getElementById('searchInput');
+    if (!searchInput) return;
+    const query = searchInput.value.trim();
+    if (!query) { 
+        alert('Введите поисковый запрос'); 
+        return; 
+    }
+    // Сохраняем поисковый запрос в localStorage
+    localStorage.setItem('globalSearchQuery', query);
+    // Перенаправляем на страницу каталога с параметром search
+    window.location.href = 'catalog.html?search=' + encodeURIComponent(query);
+}
+
+        // Функция для обработки нажатия Enter в поле поиска
+        function setupSearchOnEnter() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        performGlobalSearch();
+                    }
+                });
+            }
+        }
+
+        // Функция для обработки клика на иконку поиска (если есть)
+        function setupSearchIcon() {
+            const searchIcon = document.querySelector('.search-icon');
+            if (searchIcon) {
+                searchIcon.addEventListener('click', function () {
+                    performGlobalSearch();
+                });
+            }
+        }
+
+        // Запускаем обработчики
+        document.addEventListener('DOMContentLoaded', function () {
+            setupSearchOnEnter();
+            setupSearchIcon();
+        });
+    </script>
+    <script>
+// ============== УПРАВЛЕНИЕ СОСТОЯНИЕМ АВТОРИЗАЦИИ ==============
+// Проверка авторизации при загрузке каждой страницы
+function checkAuthState() {
+    const currentUser = localStorage.getItem('currentUser');
+    const authBtn = document.getElementById('authBtn');
+    
+    if (authBtn) {
+        if (currentUser) {
+            // Пользователь авторизован - показываем "ВЫЙТИ"
+            authBtn.textContent = 'ВЫЙТИ';
+            authBtn.onclick = function() {
+                if (confirm('Вы уверены, что хотите выйти?')) {
+                    localStorage.removeItem('currentUser');
+                    localStorage.removeItem('userName');
+                    localStorage.removeItem('userEmail');
+                    showAuthNotification('Вы вышли из аккаунта', 'info');
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                }
+            };
+        } else {
+            // Пользователь не авторизован - показываем "ВОЙТИ"
+            authBtn.textContent = 'ВОЙТИ';
+            authBtn.onclick = function() {
+                window.location.href = 'login.html';
+            };
+        }
+    }
+}
+
+// Функция уведомлений
+function showAuthNotification(message, type = 'info') {
+    const notif = document.createElement('div');
+    notif.className = 'auth-notification';
+    notif.textContent = message;
+    notif.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #1a1a1a;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        z-index: 10001;
+        animation: slideInAuth 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    `;
+    document.body.appendChild(notif);
+    
+    setTimeout(() => {
+        notif.style.animation = 'slideOutAuth 0.3s ease';
+        setTimeout(() => notif.remove(), 300);
+    }, 3000);
+}
+
+// Добавляем стили для анимации
+const authStyle = document.createElement('style');
+authStyle.textContent = `
+    @keyframes slideInAuth {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOutAuth {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+`;
+document.head.appendChild(authStyle);
+
+// Запускаем проверку при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    checkAuthState();
+    
+    // Слушаем изменения localStorage (для синхронизации между вкладками)
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'currentUser') {
+            checkAuthState();
+        }
+    });
+});
+</script>
+</body>
+
+</html>
